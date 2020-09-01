@@ -1,0 +1,121 @@
+﻿@model Collection
+
+@ViewBag.Title
+
+<form asp-action="AddCollection" asp-controller="UserProfile" method="post" enctype="multipart/form-data">
+
+    <div asp-validation-summary="ModelOnly"/>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div>
+        <label asp-for="TopicId"></label>
+        <select asp-for="TopicId" asp-items="@ViewBag.TopicsList"></select>
+    </div>
+
+    <div>
+        <input id="File" name="File" type="file" accept="image/*"/>
+    </div>
+
+    <input type="submit" value="Send"/>
+
+    <div>
+        String:
+        <div>
+            <label asp-for="CustomFieldsNames.StringFieldName1" />
+            <input type="text" asp-for="CustomFieldsNames.StringFieldName1" />
+            <span asp-validation-for="CustomFieldsNames.StringFieldName1"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.StringFieldName2" />
+            <input type="text" asp-for="CustomFieldsNames.StringFieldName2" />
+            <span asp-validation-for="CustomFieldsNames.StringFieldName2"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.StringFieldName3" />
+            <input type="text" asp-for="CustomFieldsNames.StringFieldName3" />
+            <span asp-validation-for="CustomFieldsNames.StringFieldName3"></span>
+        </div>
+
+        Bool:
+        <div>
+            <label asp-for="CustomFieldsNames.BooleanFieldName1" />
+            <input type="text" asp-for="CustomFieldsNames.BooleanFieldName1" />
+            <span asp-validation-for="CustomFieldsNames.BooleanFieldName1"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.BooleanFieldName2" />
+            <input type="text" asp-for="CustomFieldsNames.BooleanFieldName2" />
+            <span asp-validation-for="CustomFieldsNames.BooleanFieldName2"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.BooleanFieldName3" />
+            <input type="text" asp-for="CustomFieldsNames.BooleanFieldName3" />
+            <span asp-validation-for="CustomFieldsNames.BooleanFieldName3"></span>
+        </div>
+
+        Date:
+        <div>
+            <label asp-for="CustomFieldsNames.DateFieldName1" />
+            <input type="text" asp-for="CustomFieldsNames.DateFieldName1" />
+            <span asp-validation-for="CustomFieldsNames.DateFieldName1"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.DateFieldName2" />
+            <input type="text" asp-for="CustomFieldsNames.DateFieldName2" />
+            <span asp-validation-for="CustomFieldsNames.DateFieldName2"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.DateFieldName3" />
+            <input type="text" asp-for="CustomFieldsNames.DateFieldName3" />
+            <span asp-validation-for="CustomFieldsNames.DateFieldName3"></span>
+        </div>
+
+        Multitext:
+        <div>
+            <label asp-for="CustomFieldsNames.MultilineStringFieldName1" />
+            <textarea asp-for="CustomFieldsNames.MultilineStringFieldName1"></textarea>
+            <span asp-validation-for="CustomFieldsNames.MultilineStringFieldName1"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.MultilineStringFieldName2" />
+            <textarea asp-for="CustomFieldsNames.MultilineStringFieldName2"></textarea>
+            <span asp-validation-for="CustomFieldsNames.MultilineStringFieldName2"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.MultilineStringFieldName3" />
+            <textarea asp-for="CustomFieldsNames.MultilineStringFieldName3"></textarea>
+            <span asp-validation-for="CustomFieldsNames.MultilineStringFieldName3"></span>
+        </div>
+
+        Number:
+        <div>
+            <label asp-for="CustomFieldsNames.NumberFieldName1" />
+            <input type="text" asp-for="CustomFieldsNames.NumberFieldName1" />
+            <span asp-validation-for="CustomFieldsNames.NumberFieldName1"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.NumberFieldName2" />
+            <input type="text" asp-for="CustomFieldsNames.NumberFieldName2" />
+            <span asp-validation-for="CustomFieldsNames.NumberFieldName2"></span>
+        </div>
+        <div>
+            <label asp-for="CustomFieldsNames.NumberFieldName3" />
+            <input type="text" asp-for="CustomFieldsNames.NumberFieldName3" />
+            <span asp-validation-for="CustomFieldsNames.NumberFieldName3"></span>
+        </div>
+
+
+    </div>
+
+</form>

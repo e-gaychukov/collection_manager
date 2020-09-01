@@ -1,0 +1,71 @@
+﻿@model IdentityUser[]
+@inject UserManager<IdentityUser> UserManager
+
+@{ 
+  IList<IdentityUser> adminsList = await UserManager.GetUsersInRoleAsync("Admin");
+}
+
+<form method="post">
+    <table>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        @foreach (IdentityUser user in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="UserProfile" asp-controller="User" 
+                       asp-route-id="@user.Id">@user.Id</a>
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.LockoutEnabled
+                </td>
+                <td>
+                    @user.LockoutEnd
+                </td>
+                <td>
+                    <input type="submit" formmethod="post" asp-action="DeleteUserById"
+                           asp-controller="Admin"
+                           asp-route-id="@user.Id" value="Delete" />
+
+                    @if (user.LockoutEnd == null)
+                    {
+                        <input type="submit" formmethod="post" asp-action="BlockUserByIdTillDate"
+                               asp-controller="Admin"
+                               asp-route-id="@user.Id" value="Block" />
+                    }
+                    else
+                    {
+                        <input type="submit" formmethod="post" asp-action="UnBlockUserById"
+                               asp-controller="Admin"
+                               asp-route-id="@user.Id" value="Unblock" />
+                    }
+
+                    @if (adminsList.Contains(user))
+                    {
+                        <input type="submit" formmethod="post" asp-action="DismissUserFromAdminRole"
+                               asp-controller="Admin"
+                               asp-route-userId="@user.Id" value="Dismiss" />
+                    }
+                    else
+                    {
+                        <input type="submit" formmethod="post" asp-action="AssignAdminRoleToUser"
+                               asp-controller="Admin"
+                               asp-route-userId="@user.Id" value="Assign" />
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+</form>
+
+
