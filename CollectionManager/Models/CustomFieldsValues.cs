@@ -10,7 +10,7 @@ namespace CollectionManager.Models
     {
         public long? NumberFieldValue1 { get; set; }
         public long? NumberFieldValue2 { get; set; }
-        public long? NumberFieldValue13 { get; set; }
+        public long? NumberFieldValue3 { get; set; }
 
         public string StringFieldValue1 { get; set; }
         public string StringFieldValue2 { get; set; }
