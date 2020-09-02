@@ -30,6 +30,7 @@ namespace CollectionManager.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
+
         public async Task<IActionResult> UserPage(string id)
         {
             if(id != null)
@@ -46,6 +47,8 @@ namespace CollectionManager.Controllers
             return NotFound("N");
         }
 
+
+        [HttpPost]
         public async Task<IActionResult> DeleteCollection(int? id)
         {
             if(id != null)
@@ -62,19 +65,21 @@ namespace CollectionManager.Controllers
             return NotFound();
         }
 
-        public void DeleteCollectionImage(Collection collection)
+        void DeleteCollectionImage(Collection collection)
         {
             if (collection.ImageReference != null) 
             {
                 System.IO.File.Delete(GetAbsolutePath(collection.ImageReference));
             }
         }
-    
+
+
         public IActionResult AddCollection()
         {
             ViewBag.TopicsList = new SelectList(_applicationContext.Topics, "Id", "Name");
             return View(new Collection());
         }
+
         [HttpPost]
         public async Task<IActionResult> AddCollection(Collection collection, IFormFile file)
         {
@@ -93,26 +98,31 @@ namespace CollectionManager.Controllers
             ViewBag.TopicsList = new SelectList(_applicationContext.Topics, "Id", "Name", collection.TopicId);
             return View(collection);
         }
-        public async Task<IdentityUser> GetCurrentUser()
+    
+        async Task<IdentityUser> GetCurrentUser()
         {
             return await _userManager.GetUserAsync(HttpContext.User);
         }
-        public string GetFileNameWithUniquePostfix(string fileName)
+
+        string GetFileNameWithUniquePostfix(string fileName)
         {
             string namePostfixWithExtension = "-" + Guid.NewGuid().ToString() + Path.GetExtension(fileName);
             return Path.GetFileNameWithoutExtension(fileName) + namePostfixWithExtension;
         }
-        public async Task UploadFileToServer(IFormFile file, string localPathToFile)
+
+        async Task UploadFileToServer(IFormFile file, string localPathToFile)
         {
             using (FileStream fileStream = new FileStream(GetAbsolutePath(localPathToFile), FileMode.Create))
                 await file.CopyToAsync(fileStream);
         }
-        public string GetAbsolutePath(string localPath)
+
+        string GetAbsolutePath(string localPath)
         {
             return Path.Combine(_hostEnvironment.WebRootPath, localPath);
         }
 
 
+        [HttpPost]
         public async Task<IActionResult> EditCollection(int? id)
         {
             if(id != null)
@@ -152,10 +162,5 @@ namespace CollectionManager.Controllers
             }
             return View(collection);
         }
-
-
-        //https://localhost:44348/UserProfile/UserPage/f9f4c999-b042-4ed8-af39-811f2c7cd886
-        //https://localhost:44348/UserProfile/UserPage/3d7a09e5-db73-4ffc-956f-b3f40cd41792
-        //https://localhost:44348/UserProfile/CollectionPage/6
     }
 }
